@@ -1,6 +1,7 @@
 require("dotenv").config();
 const User=require("../models/User");
 const sendVerificationMail=require("../mailer/verification");
+const passport=require("passport");
 const jwt=require("jsonwebtoken");
 
 const getSignUp=(req,res)=>{
@@ -44,4 +45,37 @@ const verify=async (req,res)=>{
         res.status(500).send({message:"Internal server error"});
     }
 }
-module.exports={getSignUp,postSignUp,verify};
+
+const getLogin=(req,res)=>{
+    res.send("Login page");
+}
+
+const postLogin=async(req,res)=>{
+    try{
+        const user=await User.findOne({username:req.body.username});
+        if(!user){
+            res.status(409).send({message:"No user found. Try again"});
+        }else if(!user.verified){
+            res.status(401).send({message:"Not verified.Please verify"})
+        }else{
+            req.login(user,(err)=>{
+                if(err){
+                    res.status(500).send({message:"Internal server error"});
+                }else{
+                    passport.authenticate("local",(err,user,info)=>{
+                        if(err){
+                            res.status(500).send({message:err});
+                        }else if(!user){
+                            res.status(401).send({message:"Incorrect username or password"});
+                        }else{
+                            res.status(200).send({message:"Successfully logged in"});
+                        }
+                    })(req,res);
+                }
+            })
+        }
+    }catch(err){
+        res.status(500).send({message:"Internal server error"});
+    }
+}
+module.exports={getSignUp,postSignUp,verify,getLogin,postLogin};
