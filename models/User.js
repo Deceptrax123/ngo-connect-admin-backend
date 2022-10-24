@@ -7,7 +7,7 @@ const ngoSchema=new mongoose.Schema({
         required:true,
         unique:true
     },
-    email:{
+    username:{
         type:String,
         required:true,
         unique:true
@@ -18,6 +18,9 @@ const ngoSchema=new mongoose.Schema({
         unique:true
     },
     password:{
+        type:String,
+    },
+    verified:{
         type:String,
     }
 });
