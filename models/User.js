@@ -1,11 +1,14 @@
+require("dotenv").config();
 const mongoose=require("mongoose");
 const passportLocalMongoose=require("passport-local-mongoose");
+const jwt=require("jsonwebtoken");
+
 
 const ngoSchema=new mongoose.Schema({
     name:{
         type:String,
         required:true,
-        unique:true
+        unique:true,
     },
     username:{
         type:String,
@@ -21,11 +24,27 @@ const ngoSchema=new mongoose.Schema({
         type:String,
     },
     verified:{
-        type:String,
+        type:Boolean,
+        required:true,
     }
 });
 
 ngoSchema.plugin(passportLocalMongoose);
+ngoSchema.methods.generateVerificationToken=()=>{
+    const payload={
+        id:this._id,
+        username:this.username,
+        name:this.name,
+        contact:this.contact,
+    };
+
+    const verificationToken=jwt.sign(
+        payload,
+        process.env.USER_VERIFICATION_TOKEN,
+        {expiresIn:"7d"});
+    return verificationToken;
+};
+
 const User=mongoose.model("User",ngoSchema);
 
 module.exports=User;
