@@ -5,6 +5,7 @@ const passport=require("passport");
 const mongoose=require("mongoose");
 const passportLocalMongoose=require("passport-local-mongoose");
 const admin=require("./api/admin");
+const setup=require("./api/setup");
 
 const app=express();
 
@@ -25,6 +26,7 @@ app.get("/",(req,res)=>{
     res.send("Home route");
 })
 app.use("/",admin);
+app.use("/",setup);
 
 app.listen(process.env.PORT,function(){
     console.log("Server running on port "+process.env.PORT);

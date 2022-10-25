@@ -26,7 +26,16 @@ const ngoSchema=new mongoose.Schema({
     verified:{
         type:Boolean,
         required:true,
-    }
+    },
+    organizationVerified:{
+        type:Boolean,
+        required:true,
+        default:false
+    },
+    Details:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Detail"
+    }]
 });
 
 ngoSchema.plugin(passportLocalMongoose);
