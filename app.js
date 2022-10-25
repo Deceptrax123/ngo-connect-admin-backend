@@ -6,6 +6,7 @@ const mongoose=require("mongoose");
 const passportLocalMongoose=require("passport-local-mongoose");
 const admin=require("./api/admin");
 const setup=require("./api/setup");
+const requests=require("../api/raise_ticket");
 
 const app=express();
 
@@ -27,6 +28,7 @@ app.get("/",(req,res)=>{
 })
 app.use("/",admin);
 app.use("/",setup);
+app.use("/",requests);
 
 app.listen(process.env.PORT,function(){
     console.log("Server running on port "+process.env.PORT);
