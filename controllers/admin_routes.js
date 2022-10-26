@@ -1,5 +1,5 @@
 require("dotenv").config();
-const User=require("../models/User");
+const User=require("../../models/User");
 const sendVerificationMail=require("../mailer/verification");
 const passport=require("passport");
 const jwt=require("jsonwebtoken");

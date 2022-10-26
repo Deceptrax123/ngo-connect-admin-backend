@@ -1,5 +1,5 @@
-const User=require("../models/User");
-const Details=require("../models/Details");
+const User=require("../../models/User");
+const Details=require("../../models/Details");
 const fs=require("fs");
 const path=require("path");
 const console = require("console");
