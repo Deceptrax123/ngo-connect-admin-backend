@@ -32,14 +32,6 @@ const ngoSchema=new mongoose.Schema({
         required:true,
         default:false
     },
-    Details:[{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"Detail"
-    }],
-    Tickets:[{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"Ticket"
-    }]
 });
 
 ngoSchema.plugin(passportLocalMongoose);
