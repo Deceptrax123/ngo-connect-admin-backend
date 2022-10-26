@@ -35,6 +35,10 @@ const ngoSchema=new mongoose.Schema({
     Details:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"Detail"
+    }],
+    Tickets:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Ticket"
     }]
 });
 

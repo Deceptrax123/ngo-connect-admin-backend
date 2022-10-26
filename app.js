@@ -6,7 +6,7 @@ const mongoose=require("mongoose");
 const passportLocalMongoose=require("passport-local-mongoose");
 const admin=require("./api/admin");
 const setup=require("./api/setup");
-const requests=require("../api/raise_ticket");
+const requests=require("./api/raise_ticket");
 
 const app=express();
 

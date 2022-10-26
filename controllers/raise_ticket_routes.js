@@ -34,6 +34,8 @@ const postTicketPage=async(req,res)=>{
             requestType:request,
             status:false,
         }).save();
+
+        res.status(200).send({message:"Request raised successfully"})
     }catch(err){
         console.log(err);
         res.status(500).send({message:"Internal server error"});
