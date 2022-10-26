@@ -1,4 +1,4 @@
-const transporter=require("../config/mailer");
+const transporter=require("../../global_config/mailer");
 require("dotenv").config();
 
 const verifyUser=async(user)=>{
