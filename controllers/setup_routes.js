@@ -7,7 +7,7 @@ const console = require("console");
 const getCompleteSetup=(req,res)=>{
     if(req.isAuthenticated()){
         console.log(req.user._id);
-        res.status(200).send({message:"Complete setup and document verification"});
+        res.status(200).json({message:"Complete setup and document verification"});
     }else{
         res.redirect("/login");
     }
@@ -33,12 +33,12 @@ const postCompleteSetup=async (req,res)=>{
         try{
             await Details.findOneAndUpdate({name:req.user._id},{completed:true});
         }catch(err){
-            res.status(500).send({message:"Internal server error"});
+            res.status(500).json({message:"Internal server error"});
         }
-        res.status(200).send({message:"Documents sent for verification. Will be verified soon"});
+        res.status(200).json({message:"Documents sent for verification. Will be verified soon"});
     }catch(err){
         console.log(err);
-        res.status(500).send({message:"Internal server error"});
+        res.status(500).json({message:"Internal server error"});
     }
 };
 
